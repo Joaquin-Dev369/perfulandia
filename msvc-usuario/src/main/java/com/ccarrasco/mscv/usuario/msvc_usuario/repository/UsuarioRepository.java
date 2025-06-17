@@ -23,6 +23,15 @@ public class UsuarioRepository {
         return null;
     }
 
+    //Buscar usuario por su gmail
+    public Usuario buscarPorGmail(String gmail) {
+        for (Usuario usuario : listaUsuario) {
+            if (usuario.getCorreo().equals(gmail)) {
+                return usuario;
+            }
+        }
+        return null;
+    }
     //guardar usuario
     public Usuario guardar(Usuario usu) {
         listaUsuario.add(usu);
@@ -32,24 +41,30 @@ public class UsuarioRepository {
 
     public Usuario actualizar(Usuario usu) {
 
-        long id = 0;
-        int idPosicion = 0;
 
-        for(int i = 0; i < listaUsuario.size(); i++) {
-            if (listaUsuario.get(i).getUsuarioID() == usu.getUsuarioID()) {
-
-                id = usu.getUsuarioID();
-                idPosicion = i;
-            }
-        }
 
         Usuario usuario1 = new Usuario();
-        usuario1.setUsuarioID();
+        usuario1.setUsuarioID(usu.getUsuarioID());
         usuario1.setNombreUsuario(usu.getNombreUsuario());
+        usuario1.setCorreo(usu.getCorreo());
+        usuario1.setTipoCliente(usu.getTipoCliente());
+        usuario1.setTotalDineroCliente(usuario1.getTotalDineroCliente());
+
+        for (int i = 0; i < listaUsuario.size(); i++) {
+            if (listaUsuario.get(i).getUsuarioID() == usuario1.getUsuarioID()) {
+                listaUsuario.set(i, usuario1);
+                break;
+            }
+        }
+        // Actualizar el usuario en la lista
+        return usuario1;
 
     }
 
-
+    //Eliminar usuario por su id
+    public void eliminar(int id) {
+        listaUsuario.removeIf(usuario -> usuario.getUsuarioID() == id);
+    }
 }
 
 
