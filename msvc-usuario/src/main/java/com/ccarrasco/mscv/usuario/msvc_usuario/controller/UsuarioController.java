@@ -21,21 +21,21 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public Usuario agregarUsuario(Usuario usuario) {
+    public Usuario agregarUsuario(@RequestBody Usuario usuario) {
         return usuarioService.guardar(usuario);
     }
 
-    @GetMapping("/{id}")
-    public Usuario buscarPorID(int id) {
+    @GetMapping("/id/{id}")
+    public Usuario buscarPorID(@PathVariable Long id) {
         return usuarioService.buscarPorID(id);
     }
 
-    @GetMapping("/{correo}")
-    public Usuario buscarPorCorreo(String correo) {
+    @GetMapping("/correo/{correo}")
+    public Usuario buscarPorCorreo(@PathVariable String correo) {
         return usuarioService.buscarPorCorreo(correo);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/actualizar/{id}")
     public Usuario actualizarUsuario(@PathVariable int id, @RequestBody Usuario usuario) {
         //id se usara mas adelante
         return usuarioService.actualizar(usuario);

@@ -20,13 +20,21 @@ public class UsuarioService {
     }
 
     // Buscar Usuario por su id
-    public Usuario buscarPorID(int id) {
+    public Usuario buscarPorID(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("Error: El ID no puede ser nulo.");
+        }
         return usuarioRepository.buscarPorID(id);
     }
 
     // Buscar usuario por su correo
     public Usuario buscarPorCorreo(String correo) {
+
+        if (correo == null || correo.isEmpty()) {
+            throw new IllegalArgumentException("Error: El correo no puede estar vacío o nulo.");
+        }
         return usuarioRepository.buscarPorGmail(correo);
+
     }
 
     // Guardar usuario
